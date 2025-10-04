@@ -6,14 +6,14 @@
 
 ## Требования
 
-- [Docker](https://www.docker.com/) 20+
-- [Docker Compose](https://docs.docker.com/compose/) 1.29+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 - Файл `.env` в корне проекта с переменными окружения:
 
 Нужно получить Токен бота через BotFather и вставить
 Нужно в корне проекта создать файл .env
 ```env
-API_URL=http://api:8000
+API_URL=...
 BOT_TOKEN=<токен твоего бота>
 
 DB_HOST=...
@@ -23,14 +23,14 @@ POSTGRES_PASSWORD=...
 POSTGRES_DB=...
 ```
 Можно скопировать данные из .env.container
-Останеться только Токен бота вставить
+Останеться только токен бота вставить
 
 
 Скачиваем проект с github
 Командой ```git clone```
 
 Для запуска выполнить команду
-Команды из корня приложения
+Команды запускаем из корня приложения
 ```
 docker compose up или docker compose up -d (чтобы не выводились логи в консоль)
 ```
