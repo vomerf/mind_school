@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:17
+    container_name: mind_school_db
+    environment:
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - mind_school_db:/var/lib/postgresql/data
+
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: mindschool_api
+  #   restart: always
+  #   command: uvicorn apps.main:app --host 0.0.0.0 --port 8000 --reload
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - "8000:8000"
+
+  # bot:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: mindschool_bot
+  #   restart: always
+  #   command: python -m apps.telegram_bot.main
+  #   environment:
+  #     - API_URL=${API_URL}
+  #     - BOT_TOKEN=${BOT_TOKEN}
+  #   depends_on:
+  #     - api
+
+volumes:
+  mind_school_db:
