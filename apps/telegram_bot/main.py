@@ -13,19 +13,18 @@ from aiogram.types import (
     Message,
     ReplyKeyboardMarkup,
 )
-from dotenv import load_dotenv
-
+# from dotenv import load_dotenv
 from apps.telegram_bot.logger import bot_logger
-
-load_dotenv()
+from apps.core.config import settings
+# load_dotenv()
 
 # Пока что мокаем пользователя
-TEST_USER_ID = 100 #int(os.getenv("TEST_USER_ID"))
-API_URL = os.getenv("API_URL")
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+# TEST_USER_NAME = os.getenv("TEST_USER_NAME")
+# API_URL = os.getenv("API_URL")
+# BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 
-bot = Bot(token=BOT_TOKEN)
+bot = Bot(token=settings.BOT_TOKEN)
 dp = Dispatcher()
 
 
@@ -59,7 +58,7 @@ async def register_name(message: Message):
     last_name, name = message.text.split()
     async with AsyncClient() as client:
         resp = await client.post(
-            f"{API_URL}/register-pupil/", json={"name": name, "last_name": last_name}
+            f"{settings.API_URL}/register-pupil/", json={"name": name, "last_name": last_name}
         )
     if resp.status_code == 200:
         await message.answer("Вы успешно зарегистрированы ✅")
@@ -70,7 +69,7 @@ async def register_name(message: Message):
 @dp.message(Command("view_scores"))
 async def view_scores_handler(message: Message):
     async with AsyncClient() as client:
-        resp = await client.get(f"{API_URL}/subjects/")
+        resp = await client.get(f"{settings.API_URL}/subjects/")
         subjects = resp.json()
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
@@ -90,7 +89,7 @@ async def subject_chosen(call: CallbackQuery):
     subject_name = call.data.split(":")[1]
 
     async with AsyncClient() as client:
-        resp = await client.get(f"{API_URL}/scores/{subject_name}")
+        resp = await client.get(f"{settings.API_URL}/scores/{subject_name}")
 
     if resp.status_code != 200:
         await call.message.answer("Не удалось получить оценки")
@@ -110,7 +109,7 @@ async def subject_chosen(call: CallbackQuery):
 @dp.message(Command("enter_scores"))
 async def enter_scores_handler(message: Message, state: FSMContext):
     async with AsyncClient() as client:
-        resp = await client.get(f"{API_URL}/subjects/")
+        resp = await client.get(f"{settings.API_URL}/subjects/")
         subjects = resp.json()
 
     kb = InlineKeyboardMarkup(
@@ -150,8 +149,8 @@ async def score_received(message: Message, state: FSMContext):
     async with AsyncClient() as client:
         try:
             response = await client.post(
-                f"{API_URL}/scores/",
-                json={"subject_id": subject_id, "score": score, "user_id": TEST_USER_ID},
+                f"{settings.API_URL}/scores/",
+                json={"subject_id": subject_id, "score": score, "user_id": settings.TEST_USER_ID},
                 timeout=5.0
             )
             response.raise_for_status()

@@ -9,7 +9,7 @@ class ScoreBase(BaseModel):
 
 
 class ScoreCreate(ScoreBase):
-    user_id: int
+    user_id: int | None = None
 
 
 class ScoreUpdate(BaseModel):

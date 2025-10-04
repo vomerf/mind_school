@@ -10,6 +10,7 @@
 - [Docker Compose](https://docs.docker.com/compose/) 1.29+
 - Файл `.env` в корне проекта с переменными окружения:
 
+Нужно получить Токен бота через BotFather и вставить
 ```env
 API_URL=http://api:8000
 BOT_TOKEN=<токен твоего бота>
