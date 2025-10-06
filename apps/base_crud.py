@@ -1,4 +1,3 @@
-# app/crud/base.py
 from typing import Generic, Optional, Type, TypeVar
 
 from fastapi.encoders import jsonable_encoder

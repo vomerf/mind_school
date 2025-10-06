@@ -13,15 +13,9 @@ from aiogram.types import (
     Message,
     ReplyKeyboardMarkup,
 )
-# from dotenv import load_dotenv
+
 from apps.telegram_bot.logger import bot_logger
 from apps.core.config import settings
-# load_dotenv()
-
-# Пока что мокаем пользователя
-# TEST_USER_NAME = os.getenv("TEST_USER_NAME")
-# API_URL = os.getenv("API_URL")
-# BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 
 bot = Bot(token=settings.BOT_TOKEN)

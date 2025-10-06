@@ -20,7 +20,6 @@ class Subject(Base):
         onupdate=datetime.now(timezone.utc),
     )
 
-    # Ссылка на оценки
     scores: Mapped[list["Score"]] = relationship("Score", back_populates="subject")
 
 

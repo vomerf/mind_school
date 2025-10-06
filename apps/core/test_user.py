@@ -1,7 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from apps.core.database import async_engine
 from apps.users.models import User
-# from apps.telegram_bot.main import TEST_USER_ID
 from apps.core.config import settings
 
 
